@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMovie</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="bg-gradient-to-b from-indigo-200 to-white text-gray-800">
+
+    <!-- Navbar -->
+    <header class="bg-white absolute top-0 left-0 w-full flex items-center justify-center z-10">
+        <div class="container">
+            <div class="flex items-center justify-between relative">
+                <div class="px-4">
+                    <a href="#home" class="font-bold text-xl text-indigo-700 block py-6 ">🎬 MyMovie</a>
+                </div>
+                <div class="flex items-center px-4">
+                    <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                        <span class="hamburger-line transition duration-300 origin-top-left"></span> 
+                        <span class="hamburger-line transition duration-300"></span>
+                        <span class="hamburger-line transition duration-300 origin-bottom-left"></span>
+                    </button>
+                    <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:shadow-none lg:max-w-full lg:rounded-none">
+                        <ul class="block lg:flex">
+                            <li class="group">
+                                <a href="index.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Home</a>
+                            </li>
+                            <li class="group">
+                                <a href="movie.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Movies</a>
+                            </li>
+                            <li class="group">
+                                <a href="actor.html" class="text-base text-indigo-600 py-2 mx-8 flex group-hover:text-primary">Actors</a>
+                            </li>
+                             <div class="hidden lg:flex gap-3">
+                                <button class="text-indigo-600 px-4 py-1 rounded-lg hover:bg-indigo-50">Sign In</button>
+                                <button class="bg-indigo-600 text-white px-4 rounded-lg hover:bg-indigo-700">Sign Up</button>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar End -->
+
+    <!-- Most Popular -->
+    <div x-data ="actorModal()">
+    <section class="py-16 px-6 mt-20">
+    <div class="container mx-auto">
+        <!-- Judul -->
+        <h2 class="text-3xl font-bold text-indigo-950 mb-10 text-center">Most Popular</h2>
+
+        <!-- Grid Actors -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 group">
+            <img src="img/actors/leonardo.jpeg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Greg Hsu"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Leonardo DiCaprio</h3>
+            <p class="text-gray-600 text-sm">Known for: Titanic</p>
+            <button 
+            @click="showActor({
+                name: 'Leonardo DiCaprio',
+                image: 'img/actors/leonardo.jpeg',
+                age: 50,
+                nationality: 'Amerika Serikat',
+                knownFor: [
+                  'Titanic',
+                  'The Revenant',
+                  'The Wolf of Wall Street'
+                ],
+                bio: 'Leonardo DiCaprio adalah aktor dan produser film asal Amerika yang dikenal karena peran-peran intens dan berkualitas tinggi. Ia telah memenangkan berbagai penghargaan termasuk Academy Award.'
+            })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/robert.jpg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 2"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Robert Downey Jr</h3>
+            <p class="text-gray-600 text-sm">Known for: Iron Man</p>
+            <button 
+            @click="showActor({
+                name: 'Robert Downey Jr',
+                image: 'img/actors/robert.jpg',
+                age: 60,
+                nationality: 'Amerika Serikat',
+                knownFor: [
+                  'Iron Man',
+                  'Sherlock Holmes',
+                  'Oppenheimer',
+                  'Avengers: Endgame'
+                ],
+                bio: 'Robert Downey Jr. adalah aktor legendaris yang dikenal karena perannya sebagai Tony Stark dalam Marvel Cinematic Universe. Setelah melewati masa sulit di awal kariernya, ia bangkit dan menjadi salah satu aktor dengan bayaran tertinggi di dunia.'
+              })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/hiddleston.jpg" class="rounded-full w-36 h-36 object-cover mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 3"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Tom Hiddleston</h3>
+            <p class="text-gray-600 text-sm">Known for: Loki</p>
+            <button 
+            @click="showActor({
+                name: 'Tom Hiddleston',
+                image: 'img/actors/hiddleston.jpg',
+                age: 44,
+                nationality: 'Inggris',
+                knownFor: [
+                  'Loki',
+                  'Crimson Peak',
+                  'Kong: Skull Island',
+                  'The Night Manager'
+                ],
+                bio: 'Tom Hiddleston adalah aktor asal Inggris yang dikenal karena perannya sebagai Loki dalam film Marvel. Ia memiliki reputasi sebagai aktor berbakat dengan kemampuan akting yang mendalam, serta daya tarik yang elegan.'
+              })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/chris.jpeg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 4"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Chris Hemsworth</h3>
+            <p class="text-gray-600 text-sm">Known for: Thor</p>
+            <button 
+            @click="showActor({
+                name: 'Chris Hemsworth',
+                image: 'img/actors/chris.jpeg',
+                age: 42,
+                nationality: 'Australia',
+                knownFor: [
+                  'Thor',
+                  'Extraction',
+                  'Rush',
+                  'Men in Black: International'
+                ],
+                bio: 'Chris Hemsworth adalah aktor asal Australia yang dikenal secara global berkat perannya sebagai Thor dalam Marvel Cinematic Universe. Selain menjadi superhero ikonik, ia juga dikenal lewat film aksi seperti Extraction dan Rush.'
+              })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Most Trending -->
+    <section class="bg-gradient-to-r py-16 px-6">
+    <div class="container mx-auto">
+        <!-- Judul -->
+        <h2 class="text-3xl font-bold text-indigo-950 mb-10 text-center">Trending</h2>
+
+        <!-- Grid Actors -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/greghsu.jpg" class="rounded-full w-36 h-36 object-cover mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Greg Hsu"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Greg Hsu</h3>
+            <p class="text-gray-600 text-sm">Known for: 18 x 2 Beyond Youtfull Days</p>
+            <button 
+            @click="showActor({
+                name: 'Greg Hsu',
+                image: 'img/actors/greghsu.jpg',
+                age: 33,
+                nationality: 'Taiwan',
+                knownFor: ['Someday or One Day', '18 x 2 Beyond Youtfull Days'],
+                bio: 'Greg Hsu adalah aktor dan penyanyi asal Taiwan yang dikenal berkat perannya sebagai Li Ziwei dalam serial Someday or One Day. Ia memulai karier di dunia hiburan sebagai model sebelum beralih ke akting.'
+            })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/kaya.jpeg" class="rounded-full w-36 h-36 object-cover mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 2"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Kaya Kiyohara</h3>
+            <p class="text-gray-600 text-sm">Known for: 18 x 2 Beyond Youtfull Days</p>
+            <button 
+            @click="showActor({
+                name: 'Kaya Kiyohara',
+                image: 'img/actors/kaya.jpeg',
+                age: 22,
+                nationality: 'Jepang',
+                knownFor: [
+                  'In This Corner of the World',
+                  'A Day-Off of Kasumi Arimura',
+                  '18 x 2 Beyond Youtfull Days'
+                ],
+                bio: 'Kiyohara Kaya adalah aktris muda asal Jepang yang mulai dikenal sejak usia belia. Ia terkenal karena perannya yang natural dan ekspresif dalam berbagai film dan drama Jepang.'
+            })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/kimjiwonn.jpg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 3"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Kim Ji Won</h3>
+            <p class="text-gray-600 text-sm">Known for: Queen of Tears</p>
+            <button 
+            @click="showActor({
+                name: 'Kim Ji Won',
+                image: 'img/actors/kimjiwonn.jpg',
+                age: 32,
+                nationality: 'Korea Selatan',
+                knownFor: [
+                  'Descendants of the Sun',
+                  'Queen of Tears'
+                ],
+                bio: 'Kim Ji-won adalah aktris asal Korea Selatan yang dikenal karena perannya dalam berbagai drama populer seperti Descendants of the Sun dan Queen of Tears.'
+            })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/baesuzy.jpg" class="rounded-full w-36 h-36 object-cover mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 4"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Bae Suzy</h3>
+            <p class="text-gray-600 text-sm">Known for: Vagabond</p>
+            <button 
+            @click="showActor({
+                name: 'Bae Suzy',
+                image: 'img/actors/baesuzy.jpg',
+                age: 30,
+                nationality: 'Korea Selatan',
+                knownFor: [
+                  'Start-Up',
+                  'Vagabond',
+                  'Doona!'
+                ],
+                bio: 'Bae Suzy adalah aktris dan penyanyi asal Korea Selatan yang memulai karier sebagai anggota girl group Miss A di bawah JYP Entertainment. Setelah beralih ke dunia akting, ia meraih popularitas besar lewat drama seperti Dream High dan Start-Up.'
+            })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Nominess -->
+    <section class=" py-16 px-6">
+    <div class="container mx-auto">
+        <!-- Judul -->
+        <h2 class="text-3xl font-bold text-indigo-950 mb-10 text-center">Nominess</h2>
+
+        <!-- Grid Actors -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/timothe.jpg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Greg Hsu"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Timothée Chalamet</h3>
+            <p class="text-gray-600 text-sm">Known for: Dune, Call Me by Your Name</p>
+            <button 
+            @click="showActor({
+                name: 'Timothée Chalamet',
+                image: 'img/actors/timothe.jpg',
+                age: 29,
+                nationality: 'Amerika Serikat',
+                knownFor: ['Call Me by Your Name', 'Dune', 'Little Women'],
+                bio: 'Timothée Chalamet adalah aktor Amerika yang dikenal karena perannya yang mendalam dan ekspresif. Ia dinominasikan untuk Oscar melalui film Call Me by Your Name dan terus menjadi salah satu aktor muda paling berpengaruh di Hollywood.'
+              })" 
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/cillian.jpeg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 2"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Cillian Murphy</h3>
+            <p class="text-gray-600 text-sm">Known for: Oppenheimer, Peaky Blinders</p>
+            <button 
+            @click="showActor({
+                 name: 'Cillian Murphy',
+                image: 'img/actors/cillian.jpeg',
+                age: 49,
+                nationality: 'Irlandia',
+                knownFor: ['Oppenheimer', 'Peaky Blinders', 'Inception'],
+                bio: 'Cillian Murphy adalah aktor asal Irlandia yang dikenal lewat peran Thomas Shelby di Peaky Blinders dan sebagai J. Robert Oppenheimer di film Oppenheimer, yang memberinya penghargaan Oscar untuk Aktor Terbaik.'
+              })"
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/ryan.jpg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 3"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Ryan Gosling</h3>
+            <p class="text-gray-600 text-sm">Known for: La La Land, Barbie</p>
+            <button 
+            @click="showActor({
+               name: 'Ryan Gosling',
+              image: 'img/actors/ryan.jpg',
+              age: 44,
+              nationality: 'Kanada',
+              knownFor: ['La La Land', 'Drive', 'Barbie'],
+              bio: 'Ryan Gosling adalah aktor dan musisi asal Kanada yang telah dinominasikan untuk beberapa penghargaan Oscar. Ia dikenal karena perannya di La La Land dan Barbie, serta gaya aktingnya yang karismatik dan misterius.'
+            })"
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+
+        <!-- Actor Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 group hover:scale-105 transition-transform duration-300">
+            <img src="img/actors/emma.jpg" class="rounded-full w-36 h-36 object-cover object-top mx-auto mb-4 group-hover:scale-90 transition-transform duration-300" alt="Actor 4"/>
+            <h3 class="text-xl font-semibold text-indigo-700">Emma Stone</h3>
+            <p class="text-gray-600 text-sm">Known for: La La Land, Poor Things</p>
+            <button 
+            @click="showActor({
+                name: 'Emma Stone',
+                image: 'img/actors/emma.jpg',
+                age: 36,
+                nationality: 'Amerika Serikat',
+                knownFor: ['Poor Things', 'La La Land', 'Easy A'],
+                bio: 'Emma Stone adalah aktris pemenang Oscar asal Amerika yang dikenal lewat perannya dalam La La Land dan Poor Things. Ia terkenal karena kemampuan aktingnya yang ekspresif dan kepribadiannya yang menawan.'
+              })"
+            class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-800">Detail</button>
+        </div>
+        </div>
+    </div>
+    </section>
+    <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black/70 z-9999" x-transition>
+    <div class="bg-white rounded-xl shadow-lg w-[650px] p-6 relative flex flex-col md:flex-row gap-6 items-center">
+      <!-- Tombol Close -->
+      <button @click="open = false" class="absolute top-3 right-3 text-gray-500 hover:text-red-500">✖</button>
+      
+      <!-- Foto Aktor -->
+      <img :src="actor.image" class="w-40 h-45 rounded-lg object-cover shadow-mg" alt="Foto Aktor">
+      
+      <!-- Info Aktor -->
+      <div class="flex flex-col space-y-1 text-left">
+        <h2 class="text-2xl font-bold" x-text="actor.name"></h2>
+        <p class="text-gray-700 font-semibold">Umur: <span  class= "font-normal" x-text="actor.age"></span></p>
+        <p class="text-gray-700 font-semibold">Asal: <span class= "font-normal" x-text="actor.nationality"></span></p>
+        <div>
+          <p class="text-gray-600 font-semibold">Film Terkenal:</p>
+          <ul class="list-disc list-inside text-gray-600">
+            <template x-for="movie in actor.knownFor" :key="movie">
+              <li class="text-sm" x-text="movie"></li>
+            </template>
+          </ul>
+        </div>
+        <p class="text-gray-600 text-sm" x-text="actor.bio"></p>
+      </div>
+    </div>
+  </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto bg-gradient-to-b from-white to-indigo-200 mt-12 shadow rounded-lg">
+      <div class="px-6 py-8 flex flex-col md:flex-row items-center md:justify-between text-center md:text-left">
+        <h4 class="text-xl font-bold mb-4 md:mb-0 text-indigo-700">🎬 MyMovie</h4>
+        
+        <div class="flex gap-6 justify-center md:justify-end">
+          <a href="https://www.instagram.com/hadiarsyd_/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M16 3C8.83 3 3 8.83 3 16V34C3 41.17 8.83 47 16 47H34C41.17 47 47 41.17 47 34V16C47 8.83 41.17 3 34 3H16zM37 11C38.1 11 39 11.9 39 13C39 14.1 38.1 15 37 15C35.9 15 35 14.1 35 13C35 11.9 35.9 11 37 11zM25 14C31.07 14 36 18.93 36 25C36 31.07 31.07 36 25 36C18.93 36 14 31.07 14 25C14 18.93 18.93 14 25 14zM25 16C20.04 16 16 20.04 16 25C16 29.96 20.04 34 25 34C29.96 34 34 29.96 34 25C34 20.04 29.96 16 25 16z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848
+                c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588
+                l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4zM17,20v19h-6V20H17z
+                M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10
+                c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56
+                c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kontak -->
+      <div class="px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
+        <button class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 mb-4 md:mb-0">
+          Contact us :
+        </button>
+
+        <div>
+          <p class="mb-2">Email: MyMovie@gmail.com</p>
+          <p class="mb-2">Phone: 0831-2100-6688</p>
+          <p>Address: Bandung, Jawa Barat</p>
+        </div>
+      </div>
+
+      <!-- Subscribe -->
+      <div class="px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <p class="text-center md:text-left text-gray-700 font-medium">
+          Dapatkan info terbaru tentang film dan aktor favoritmu.
+        </p>
+        <form class="flex flex-col sm:flex-row justify-center md:justify-end gap-4">
+          <input type="email" placeholder="Email" class="rounded-lg border text-indigo-600 border-indigo-600 bg-white py-2 px-4 w-full sm:w-auto"/>
+          <button class="bg-indigo-700 text-white px-6 py-2 rounded-lg hover:bg-indigo-800">
+            Subscribe to news
+          </button>
+        </form>
+      </div>
+
+      <!-- Bawah -->
+      <div class="border-t border-indigo-700 py-6 text-center text-sm text-gray-600">
+        © 2025 MyMovie. All Rights Reserved.
+        <a href="#" class="underline ml-2">Privacy Policy</a>
+      </div>
+    </footer>
+
+    <script>
+    function actorModal() {
+        return{
+            open: false,
+            actor: {
+            name: '', 
+            image: '', 
+            age: '',
+            nationality:'',
+            knownFor:[],
+            bio: ''
+            },
+            showActor(data) {
+            this.actor = data
+            this.open = true
+            }
+        }
+    }
+    </script>
+    <script src="dist/js/script.js"></script>
+  </body>
+</html>

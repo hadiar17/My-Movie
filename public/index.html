@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMovie</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <script defer src="js/alpine.min.js"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <header class="bg-white absolute top-0 left-0 w-full flex items-center justify-center z-10">
+        <div class="container">
+            <div class="flex items-center justify-between relative">
+                <div class="px-4">
+                    <a href="#home" class="font-bold text-xl text-indigo-700 block py-6 ">🎬 MyMovie</a>
+                </div>
+                <div class="flex items-center px-4">
+                    <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                        <span class="hamburger-line transition duration-300 origin-top-left"></span> 
+                        <span class="hamburger-line transition duration-300"></span>
+                        <span class="hamburger-line transition duration-300 origin-bottom-left"></span>
+                    </button>
+                    <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:shadow-none lg:max-w-full lg:rounded-none">
+                        <ul class="block lg:flex">
+                            <li class="group">
+                                <a href="index.html" class="text-base text-indigo-600 py-2 mx-8 flex group-hover:text-primary">Home</a>
+                            </li>
+                            <li class="group">
+                                <a href="movie.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Movies</a>
+                            </li>
+                            <li class="group">
+                                <a href="actor.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Actors</a>
+                            </li>
+                            <div class="hidden lg:flex gap-3">
+                                <button class="text-indigo-600 px-4 py-1 rounded-lg hover:bg-indigo-50">Sign In</button>
+                                <button class="bg-indigo-600 text-white px-4 rounded-lg hover:bg-indigo-700">Sign Up</button>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar End -->
+
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-tr from-indigo-100 to-white min-h-[500px] flex items-center mt-20">
+      <div class="container mx-auto flex flex-row justify-between items-center px-6 py-20 relative">
+        <!-- Text -->
+        <div class="max-w-lg mb-6 md:mb-0">
+          <h2 class="text-4xl md:text-5xl font-bold mb-3 md:mb-6">Satu Situs, Semua Tentang Film</h2>
+          <p class="text-gray-600 mb-6">Kami hadir dengan info rating, sinopsis, dan artis untuk membantumu pilih tontonan terbaik.</p>
+          <div class="flex gap-4">
+            <a href="movie.html" class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 z-10">Jelajahi Film</a>
+            <a href="actor.html" class="border border-indigo-600 text-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-50 z-10">Cari Aktor</a>
+          </div>
+        </div>
+        <!-- Poster Foto -->
+       <div class="grid grid-cols-3 gap-3 max-w-lg absolute -top-[40] right-7 opacity-10 md:grid md:opacity-20 lg:opacity-65">
+      <!-- Kolom kiri -->
+      <div class="flex flex-col space-y-3">
+        <img src="img/movie/beyond.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/worstevil.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/vincenzo.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/vigilante.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+      </div>
+
+      <!-- Kolom tengah -->
+      <div class="flex flex-col space-y-3 translate-y-18">
+        <img src="img/movie/blood.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/extraction.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/society.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+      </div>
+
+      <!-- Kolom kanan -->
+      <div class="flex flex-col space-y-3">
+        <img src="img/movie/myname.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/drawingcl.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/beyond.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+        <img src="img/movie/extraction1.jpeg" class="rounded-lg object-cover w-36 h-52" alt=""/>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- Actors -->
+    <div x-data="actorModal()">
+    <section class="container mx-auto px-6 py-12">
+      <h3 class="text-2xl font-bold mb-6">Actors</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-6 text-center gap-y-6 md:gap-y-8 ">
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/greghsu.jpg" 
+           @click="showActor({
+            name: 'Greg Hsu',
+            image: 'img/actors/greghsu.jpg',
+            age: 33,
+            nationality: 'Taiwan',
+            knownFor: ['Someday or One Day', '18 x 2 Beyond Youtfull Days'],
+            bio: 'Greg Hsu adalah aktor dan penyanyi asal Taiwan yang dikenal berkat perannya sebagai Li Ziwei dalam serial Someday or One Day. Ia memulai karier di dunia hiburan sebagai model sebelum beralih ke akting.'
+          })"
+          class="rounded-full w-35 h-35 object-cover mb-4 mx-auto cursor-pointer" alt="Greg Hsu"/>
+          <p class="text-sm">Greg Hsu</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/kaya.jpeg" 
+           @click="showActor({
+            name: 'Kaya Kiyohara',
+            image: 'img/actors/kaya.jpeg',
+            age: 22,
+            nationality: 'Jepang',
+            knownFor: [
+              'In This Corner of the World',
+              'A Day-Off of Kasumi Arimura',
+              '18 x 2 Beyond Youtfull Days'
+            ],
+            bio: 'Kiyohara Kaya adalah aktris muda asal Jepang yang mulai dikenal sejak usia belia. Ia terkenal karena perannya yang natural dan ekspresif dalam berbagai film dan drama Jepang.'
+          })"
+          class="rounded-full w-35 h-35 object-cover mb-4 mx-auto cursor-pointer " alt=""/>
+          <p class="text-sm">Kaya Kiyohara</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/natsuki.jpeg" 
+           @click="showActor({
+            name: 'Natsuki Deguchi',
+            image: 'img/actors/natsuki.jpeg',
+            age: 23,
+            nationality: 'Jepang',
+            knownFor: [
+              'Drawing Closer',
+              'A Town Without Seasons',
+            ],
+            bio: 'Natsuki Deguchi adalah aktris dan model asal Jepang. Ia memulai karier sebagai model sebelum terjun ke dunia akting, dan berhasil menarik perhatian publik lewat berbagai drama romantis dan film remaja.'
+          })"
+          class="rounded-full w-35 h-35 object-cover object-top mb-4 mx-auto cursor-pointer" alt=""/>
+          <p class="text-sm">Natsuki Deguchi</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/kimjiwonn.jpg" 
+           @click="showActor({
+            name: 'Kim Ji Won',
+            image: 'img/actors/kimjiwonn.jpg',
+            age: 32,
+            nationality: 'Korea Selatan',
+            knownFor: [
+              'Descendants of the Sun',
+              'Queen of Tears'
+            ],
+            bio: 'Kim Ji-won adalah aktris asal Korea Selatan yang dikenal karena perannya dalam berbagai drama populer seperti Descendants of the Sun dan Queen of Tears.'
+          })"
+          class="rounded-full w-35 h-35 object-cover object-top mb-4 mx-auto cursor-pointer " alt=""/>
+          <p class="text-sm">Kim Ji Won</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/baesuzy.jpg" 
+           @click="showActor({
+            name: 'Bae Suzy',
+            image: 'img/actors/baesuzy.jpg',
+            age: 30,
+            nationality: 'Korea Selatan',
+            knownFor: [
+              'Start-Up',
+              'Vagabond',
+              'Doona!'
+            ],
+            bio: 'Bae Suzy adalah aktris dan penyanyi asal Korea Selatan yang memulai karier sebagai anggota girl group Miss A di bawah JYP Entertainment. Setelah beralih ke dunia akting, ia meraih popularitas besar lewat drama seperti Dream High dan Start-Up.'
+          })"
+          class="rounded-full w-35 h-35 object-cover mb-4 mx-auto cursor-pointer" alt=""/>
+          <p class="text-sm">Bae Suzy</p>
+        </div>
+
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/actors/rennagase.jpeg" 
+           @click="showActor({
+            name: 'Ren Nagase',
+            image: 'img/actors/rennagase.jpeg',
+            age: 25,
+            nationality: 'Jepang',
+            knownFor: [
+              'Drawing Closer',
+              'The Midnight Studio',
+              'Eternal Yesterday'
+            ],
+            bio: 'Ren Nagase adalah aktor, penyanyi, dan anggota grup idol Jepang. Ia dikenal dengan kemampuan akting yang kuat dan kehadirannya yang karismatik. Popularitasnya terus meningkat baik sebagai aktor maupun entertainer.'
+          })"
+          class="rounded-full w-35 h-35 object-cover mb-4 mx-auto cursor-pointer" alt=""/>
+          <p class="text-sm">Ren Nagase</p>
+        </div>
+        
+      </div>
+      <div class="text-start">
+        <a href="actor.html" class="bg-white text-indigo-600 border border-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-600 hover:text-white transition duration-300">Lihat Semuanya</a>
+      </div>
+    </section>
+    
+    <!-- Modal -->
+   <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black/70 z-9999" x-transition>
+    <div class="bg-white rounded-xl shadow-lg md:w-[650px] md:max-h-350px p-6 relative flex flex-col md:flex-row gap-6 items-center">
+      <!-- Tombol Close -->
+      <button @click="open = false" class="absolute top-3 right-3 text-gray-500 hover:text-red-500">✖</button>
+      
+      <!-- Foto Aktor -->
+      <img :src="actor.image" class="w-40 h-45 rounded-lg object-cover object-top shadow-lg" alt="Foto Aktor">
+      
+      <!-- Info Aktor -->
+      <div class="flex flex-col space-y-1 text-left">
+        <h2 class="text-2xl font-bold" x-text="actor.name"></h2>
+        <p class="text-gray-700 font-semibold">Umur: <span  class= "font-normal" x-text="actor.age"></span></p>
+        <p class="text-gray-700 font-semibold">Asal: <span class= "font-normal" x-text="actor.nationality"></span></p>
+        <div>
+          <p class="text-gray-600 font-semibold">Film Terkenal:</p>
+          <ul class="list-disc list-inside text-gray-600">
+            <template x-for="movie in actor.knownFor" :key="movie">
+              <li class="text-sm" x-text="movie"></li>
+            </template>
+          </ul>
+        </div>
+        <p class="text-gray-600 text-sm" x-text="actor.bio"></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+    <!-- Movies -->
+    <div x-data="movieModal()">
+    <section class="container mx-auto px-6 py-12">
+      <h3 class="text-2xl font-bold mb-6">Movie</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 text-center gap-2 mb-6 gap-y-6 md:gap-y-8">
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/beyond.jpeg"
+          @click="showModal({
+           title: '18 x 2 Beyond Youtfull Days',
+           image: 'img/movie/beyond.jpeg',
+           description: ' Tentang seorang pria berusia 36 tahun bernama Jimmy yang melakukan perjalanan ke Jepang untuk menemukan cinta lamanya, Ami, yang ia temui 18 tahun lalu di Taiwan saat keduanya masih muda',
+           rating: '⭐ 8.7/10',
+           genres: ['Romance', 'Adventure'],
+           age: '13+',
+           mc: ['Greghsu', 'Kaya Kiyohara']
+         })" 
+          class="rounded-lg shadow-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">18 x 2 Beyond Youtfull Days</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/drawingcl.jpeg" 
+         @click="showModal({
+            title: 'Drawing Closer',
+            image: 'img/movie/drawingcl.jpeg',
+            description: 'Seorang pria yang divonis mengidap penyakit langka, dan Haruna, gadis yang juga berjuang melawan kondisi yang sama. Pertemuan mereka di rumah sakit mengubah hidup keduanya, menghadirkan arti baru tentang harapan dan cinta meski waktu mereka terbatas.',
+            rating: '⭐ 8.4/10',
+            genres: ['Romance', 'Drama', 'Tragedy'],
+            age: '13+',
+            mc: ['Ren Nagase', 'Natsuki Deguchi']
+          })"
+          class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">Drawing Closer</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+         <img src="img/movie/horror/thenun.jpg" 
+        @click="showModal({
+            title: 'The Nun',
+            image: 'img/movie/horror/thenun.jpg',
+            description: 'Seorang biarawati muda dan seorang imam dikirim Vatikan untuk menyelidiki kematian misterius di biara Rumania, namun mereka menemukan kekuatan iblis yang menakutkan bernama Valak.',
+            rating: '⭐ 7.3/10',
+            genres: ['Horror', 'Thriller', 'Supernatural'],
+            age: '17+',
+            mc: ['Taissa Farmiga', 'Demián Bichir']
+          })"
+         class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">The Nun</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/insidious.jpg" 
+         @click="showModal({
+            title: 'Insidious: The Red Door',
+            image: 'img/movie/horror/insidious.jpg',
+            description: 'Keluarga Lambert kembali menghadapi masa lalu mereka yang menakutkan ketika pintu menuju dunia roh dibuka kembali. Perjalanan menegangkan ke dunia The Further pun dimulai.',
+            rating: '⭐ 7.9/10',
+            genres: ['Horror', 'Mystery', 'Supernatural'],
+            age: '17+',
+            mc: ['Patrick Wilson', 'Ty Simpkins', 'Rose Byrne']
+          })"
+          class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">Insidious: The Red Door</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/worstevil.jpeg"
+           @click="showModal({
+           title: 'The Worst of Evil',
+            image: 'img/movie/worstevil.jpeg',
+            description: 'Di Seoul tahun 1990-an, seorang polisi menyamar untuk menyusup ke organisasi narkoba yang berpengaruh. Ia mendapati dirinya terjebak di antara tugas, pengkhianatan, dan cinta yang membingungkan.',
+            rating: '⭐ 8.5/10',
+            genres: ['Action', 'Crime', 'Drama'],
+            age: '18+',
+            mc: ['Ji Chang Wook', 'Wi Ha Joon', 'Im Se Mi']
+          })"
+          class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">The Worst Of Evil</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/vincenzo.jpeg"
+           @click="showModal({
+           title: 'Vincenzo',
+            image: 'img/movie/vincenzo.jpeg',
+            description: 'Vincenzo Cassano, seorang pengacara sekaligus consigliere mafia asal Italia, kembali ke Korea untuk mengembalikan emas tersembunyi di bawah gedung tua. Namun, ia harus berhadapan dengan konglomerat korup dan membalas kejahatan dengan caranya sendiri.',
+            rating: '⭐ 9.1/10',
+            genres: ['Action', 'Crime', 'Comedy'],
+            age: '16+',
+            mc: ['Song Joong Ki', 'Jeon Yeo Been', 'Ok Taecyeon']
+          })"
+          class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">Vincenzo</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/vigilante.jpeg"
+           @click="showModal({
+           title: 'Vigilante',
+            image: 'img/movie/vigilante.jpeg',
+            description: 'Kim Ji Yong adalah mahasiswa akademi kepolisian yang menjadi pahlawan bayangan di malam hari. Ia menghukum para pelaku kejahatan yang lolos dari hukum, sementara polisi berusaha memburunya.',
+            rating: '⭐ 8.3/10',
+            genres: ['Action', 'Thriller', 'Crime'],
+            age: '18+',
+            mc: ['Nam Joo Hyuk', 'Yoo Ji Tae', 'Lee Joon Hyuk']
+          })"
+          class="rounded-lg w-37 h-50 mx-auto object-cover mb-2 cursor-pointer" alt=""/>
+          <p class="text-sm">Vigilante</p>
+        </div>
+
+      </div>
+      <div class="text-start">
+        <a href="movie.html" class="bg-white text-indigo-600 border border-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-600 hover:text-white transition duration-300">Lihat Semuanya</a>
+      </div>
+    </section>
+    <!-- Modal -->
+      <div x-show="open"
+          class="fixed inset-0 flex items-center justify-center bg-black/70 z-9999"
+          x-transition>
+          
+        <div class="bg-white rounded-xl shadow-lg w-[700px] md:w-[700px] md:max-h-[350px] p-6 relative flex flex-col md:flex-row items-center gap-6">
+          <!-- Tombol close -->
+          <button @click="open = false" 
+                  class="absolute top-3 right-3 text-gray-500 hover:text-red-500">
+            ✖
+          </button>
+
+          <!-- Gambar Kiri -->
+          <div class="flex-shrink-0">
+            <img :src="movie.image" 
+                class="w-52 h-72 object-cover rounded-lg shadow-md" 
+                alt="Poster Film" />
+          </div>
+
+          <!-- Konten Kanan -->
+          <div class="flex flex-col justify-between text-left space-y-4">
+            <div>
+              <h2 class="text-2xl font-bold mb-3" x-text="movie.title"></h2>
+
+              <!-- Genre dan usia -->
+              <div class="flex flex-wrap gap-2 mb-3">
+                <template x-for="genre in movie.genres" :key="genre">
+                  <button class="text-indigo-600 border border-indigo-600 bg-white px-3 py-1 rounded-lg hover:bg-indigo-50 text-sm" x-text="genre"></button>
+                </template>
+                <button class="bg-indigo-600 text-white px-3 py-1 rounded-lg text-sm" x-text="movie.age"></button>
+              </div>
+
+              <p class="text-gray-600 text-sm mb-2" x-text="movie.description"></p>
+
+              <!-- Nama MC -->
+              <p class="text-gray-700 font-semibold"></p>
+                <p class="text-indigo-600">Pemeran Utama: <span class="text-gray-700" x-text="movie.mc.join(', ')"></span></p>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 font-semibold" x-text="movie.rating"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto bg-gradient-to-b from-white to-indigo-200 mt-12 shadow rounded-lg">
+      <div class="px-6 py-8 flex flex-col md:flex-row items-center md:justify-between text-center md:text-left">
+        <h4 class="text-xl font-bold mb-4 md:mb-0 text-indigo-700">🎬 MyMovie</h4>
+        
+        <div class="flex gap-6 justify-center md:justify-end">
+          <a href="https://www.instagram.com/hadiarsyd_/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M16 3C8.83 3 3 8.83 3 16V34C3 41.17 8.83 47 16 47H34C41.17 47 47 41.17 47 34V16C47 8.83 41.17 3 34 3H16zM37 11C38.1 11 39 11.9 39 13C39 14.1 38.1 15 37 15C35.9 15 35 14.1 35 13C35 11.9 35.9 11 37 11zM25 14C31.07 14 36 18.93 36 25C36 31.07 31.07 36 25 36C18.93 36 14 31.07 14 25C14 18.93 18.93 14 25 14zM25 16C20.04 16 16 20.04 16 25C16 29.96 20.04 34 25 34C29.96 34 34 29.96 34 25C34 20.04 29.96 16 25 16z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848
+                c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588
+                l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4zM17,20v19h-6V20H17z
+                M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10
+                c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56
+                c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kontak -->
+      <div class="px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
+        <button class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 mb-4 md:mb-0">
+          Contact us :
+        </button>
+
+        <div>
+          <p class="mb-2">Email: MyMovie@gmail.com</p>
+          <p class="mb-2">Phone: 0831-2100-6688</p>
+          <p>Address: Bandung, Jawa Barat</p>
+        </div>
+      </div>
+
+      <!-- Subscribe -->
+      <div class="px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <p class="text-center md:text-left text-gray-700 font-medium">
+          Dapatkan info terbaru tentang film dan aktor favoritmu.
+        </p>
+        <form class="flex flex-col sm:flex-row justify-center md:justify-end gap-4">
+          <input type="email" placeholder="Email" class="rounded-lg border text-indigo-600 border-indigo-600 bg-white py-2 px-4 w-full sm:w-auto"/>
+          <button class="bg-indigo-700 text-white px-6 py-2 rounded-lg hover:bg-indigo-800">
+            Subscribe to news
+          </button>
+        </form>
+      </div>
+
+      <!-- Bawah -->
+      <div class="border-t border-indigo-700 py-6 text-center text-sm text-gray-600">
+        © 2025 MyMovie. All Rights Reserved.
+        <a href="#" class="underline ml-2">Privacy Policy</a>
+      </div>
+    </footer>
+
+    
+     <script>
+    function movieModal() {
+    return {
+      open: false,
+      movie: { 
+        title: '', 
+        image: '', 
+        description: '', 
+        rating: '', 
+        genres: [], 
+        age: '', 
+        mc: [] 
+      },
+      showModal(data) {
+        this.movie = data
+        this.open = true
+      }
+    }
+  }
+
+    function actorModal() {
+      return{
+        open: false,
+        actor: {
+          name: '', 
+          image: '', 
+          age: '',
+          nationality:'',
+          knownFor:[],
+          bio: ''
+        },
+        showActor(data) {
+          this.actor = data
+          this.open = true
+        }
+      }
+    }
+
+  </script>
+  <script src="dist/js/script.js"></script>
+  <!--  npx @tailwindcss/cli -i ./src/css/input.css -o ./public/css/output.css --watch -->
+  </body>
+</html>

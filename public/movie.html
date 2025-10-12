@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMovie</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <header class="bg-white absolute top-0 left-0 w-full flex items-center justify-center z-10">
+        <div class="container">
+            <div class="flex items-center justify-between relative">
+                <div class="px-4">
+                    <a href="#home" class="font-bold text-xl text-indigo-700 block py-6 ">🎬 MyMovie</a>
+                </div>
+                <div class="flex items-center px-4">
+                    <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                        <span class="hamburger-line transition duration-300 origin-top-left"></span> 
+                        <span class="hamburger-line transition duration-300"></span>
+                        <span class="hamburger-line transition duration-300 origin-bottom-left"></span>
+                    </button>
+                    <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:shadow-none lg:max-w-full lg:rounded-none">
+                        <ul class="block lg:flex">
+                            <li class="group">
+                                <a href="index.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Home</a>
+                            </li>
+                            <li class="group">
+                                <a href="movie.html" class="text-base text-indigo-600 py-2 mx-8 flex group-hover:text-primary">Movies</a>
+                            </li>
+                            <li class="group">
+                                <a href="actor.html" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Actors</a>
+                            </li>
+                             <div class="hidden lg:flex gap-3">
+                                <button class="text-indigo-600 px-4 py-1 rounded-lg hover:bg-indigo-50">Sign In</button>
+                                <button class="bg-indigo-600 text-white px-4 rounded-lg hover:bg-indigo-700">Sign Up</button>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar End -->
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-indigo-200 to-white  relative max-h-[500px] flex items-center mt-20">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-20">
+        <!-- Text Kiri -->
+          <div class="max-w-lg mb-6 md:mb-0">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Extraction</h2>
+            <div class="flex gap-2 mb-4">
+             <button class="text-indigo-600 border bg-white border-indigo-600 text-sm lg:text-base px-2 md:px-3 md:py-1 rounded-lg hover:bg-indigo-50">Action</button>
+             <button class="text-indigo-600 border bg-white border-indigo-600 text-sm lg:text-base px-2 md:px-3 py-1 rounded-lg hover:bg-indigo-50">Crime</button>
+             <button class="text-indigo-600 border bg-white border-indigo-600 text-sm lg:text-base px-2 md:px-3 py-1 rounded-lg hover:bg-indigo-50">Thriller</button>
+             <button class="bg-indigo-600 text-white px-2 md:px-3 py-1 rounded-lg hover:bg-indigo-800">18 + </button>
+            </div>
+            <div class="max-w-sm">
+              <p class="text-gray-600">Misi baru pembunuh bayaran tangguh inin menjadi pencarian jati diri demi bertahan hidup saat ia diutus ke Bangladesh untuk menyelamatkan putra bandar narkoba yang diculik</p>
+            </div>
+        </div>
+        <!-- Gambar Kanan -->
+        <div class="max-w-lg">
+          <img src="img/movie/bgextraction.jpg" alt="Extraction"
+           class="rounded-lg shadow-2xl h:-[250px] w-[400px] md:h-[300px] md:w-[400px] lg:w-[500px] object-cover"/>
+        </div>
+      </div>
+    </section>
+
+    <div x-data="movieModal()">
+    <!-- Movies Romance -->
+    <section class="container mx-auto px-6 py-12">
+      <h3 class="text-2xl font-bold mb-6">Romance</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-2 mb-6 text-center gap-y-6 md:gap-y-8">
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/beyond.jpeg" 
+           @click="showModal({
+           title: 'Beyond the Horizon',
+           image: 'img/movie/beyond.jpeg',
+           description: ' Tentang seorang pria berusia 36 tahun bernama Jimmy yang melakukan perjalanan ke Jepang untuk menemukan cinta lamanya, Ami, yang ia temui 18 tahun lalu di Taiwan saat keduanya masih muda',
+           rating: '⭐ 8.7/10',
+           genres: ['Romance', 'Adventure'],
+           age: '13+',
+           mc: ['Greghsu', 'Kaya Kiyohara']
+         })" 
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">18 x 2 Beyond Youtfull Days</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+         <img src="img/movie/romance/yourname.jpg" 
+         @click="showModal({
+          title: 'Your Name',
+          image: 'img/movie/romance/yourname.jpg',
+          description: 'Mitsuha dan Taki mendapati diri mereka saling bertukar tubuh tanpa alasan yang jelas. Di tengah kebingungan, keduanya mulai membentuk hubungan emosional yang mendalam meski terpisah oleh waktu dan ruang.',
+          rating: '⭐ 9.0/10',
+          genres: ['Romance', 'Fantasy', 'Drama'],
+          age: '13+',
+          mc: ['Mitsuha Hyuga', 'Taki Uzumaki']
+        })" 
+         class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Your Name</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/romance/abouttime.jpg" 
+          @click="showModal({
+            title: 'About Time',
+            image: 'img/movie/romance/abouttime.jpg',
+            description: 'Seorang pria muda bernama Tim menemukan bahwa ia bisa melakukan perjalanan waktu. Dengan kemampuan itu, ia mencoba memperbaiki kesalahan masa lalunya untuk menemukan cinta sejatinya.',
+            rating: '⭐ 8.1/10',
+            genres: ['Romance', 'Fantasy', 'Drama'],
+            age: '13+',
+            mc: ['Domhnall Gleeson', 'Rachel McAdams']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">About Time</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/romance/amomento.jpg" 
+         @click="showModal({
+          title: 'A Moment to Remember',
+          image: 'img/movie/romance/amomento.jpg',
+          description: 'Kisah cinta yang hangat antara seorang pria pekerja keras dan wanita ceria yang perlahan kehilangan ingatannya karena Alzheimer. Cinta mereka diuji oleh waktu dan kenangan yang memudar.',
+          rating: '⭐ 8.2/10',
+          genres: ['Romance', 'Melodrama'],
+          age: '15+',
+          mc: ['Jung Woo-sung', 'Son Ye-jin']
+        })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">A Moment to Remember</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/drawingcl.jpeg" 
+         @click="showModal({
+            title: 'Drawing Closer',
+            image: 'img/movie/drawingcl.jpeg',
+            description: 'Seorang pria yang divonis mengidap penyakit langka, dan Haruna, gadis yang juga berjuang melawan kondisi yang sama. Pertemuan mereka di rumah sakit mengubah hidup keduanya, menghadirkan arti baru tentang harapan dan cinta meski waktu mereka terbatas.',
+            rating: '⭐ 8.4/10',
+            genres: ['Romance', 'Drama', 'Tragedy'],
+            age: '13+',
+            mc: ['Ren Nagase', 'Natsuki Deguchi']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Drawing Closer</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/romance/lalaland.jpg" 
+         @click="showModal({
+          title: 'La La Land',
+          image: 'img/movie//romance/lalaland.jpg',
+          description: 'Seorang pianis jazz dan aktris muda berjuang mengejar impian mereka di Los Angeles, namun ambisi dan kenyataan hidup menguji cinta mereka.',
+          rating: '⭐ 8.6/10',
+          genres: ['Romance', 'Musical', 'Drama'],
+          age: '13+',
+          mc: ['Ryan Gosling', 'Emma Stone']
+        })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">La La Land</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/romance/20thcenturygirl.jpg" 
+          @click="showModal({
+            title: '20th Century Girl',
+            image: 'img/movie/romance/20thcenturygirl.jpg',
+            description: 'Di Korea tahun 1999, seorang gadis SMA menjaga jarak dari cinta demi sahabatnya, tapi takdir justru mempertemukannya dengan kisah cinta pertama yang tak terlupakan.',
+            rating: '⭐ 8.0/10',
+            genres: ['Romance', 'Youth', 'Drama'],
+            age: '13+',
+            mc: ['Kim Yoo-jung', 'Byeon Woo-seok']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">20th Century Girl</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Movies Action -->
+    <section class="container mx-auto px-6 py-12">
+      <h3 class="text-2xl font-bold mb-6">Action</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-2 mb-6 text-center gap-y-6 md:gap-y-8">
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/spiderman.jpg" 
+         @click="showModal({
+            title: 'Spider-Man: No Way Home',
+            image: 'img/movie/spiderman.jpg',
+            description: 'Ketika identitas Spider-Man terungkap, Peter Parker meminta bantuan Doctor Strange untuk membuat semua orang melupakannya. Namun, sihir itu salah dan membuka celah multiverse yang membawa para musuh dari dimensi lain.',
+            rating: '⭐ 9.0/10',
+            genres: ['Action', 'Adventure', 'Sci-Fi'],
+            age: '13+',
+            mc: ['Tom Holland', 'Zendaya', 'Benedict Cumberbatch']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Spider-Man: No Way Home</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+         <img src="img/movie/extraction1.jpeg" 
+         @click="showModal({
+            title: 'Extraction',
+            image: 'img/movie/extraction1.jpeg',
+            description: 'Tyler Rake, seorang tentara bayaran tak kenal takut, dikirim untuk menyelamatkan putra seorang penguasa narkoba yang diculik di Bangladesh. Misi berbahaya ini menguji batas kekuatannya dan menyingkap masa lalunya yang kelam.',
+            rating: '⭐ 8.6/10',
+            genres: ['Action', 'Thriller'],
+            age: '18+',
+            mc: ['Chris Hemsworth', 'Rudhraksh Jaiswal']
+          })"
+         class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Extraction</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/extraction.jpeg" 
+         @click="showModal({
+            title: 'Extraction 2',
+            image: 'img/movie/extraction.jpeg',
+            description: 'Setelah selamat dari misi sebelumnya, Tyler Rake kembali dalam tugas baru: menyelamatkan keluarga seorang gangster yang dipenjara. Aksi brutal dan adegan penuh adrenalin menandai kembalinya sang prajurit legendaris.',
+            rating: '⭐ 8.7/10',
+            genres: ['Action', 'Crime', 'Thriller'],
+            age: '18+',
+            mc: ['Chris Hemsworth', 'Golshifteh Farahani']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Extraction 2</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/worstevil.jpeg" 
+          @click="showModal({
+            title: 'The Worst of Evil',
+            image: 'img/movie/worstevil.jpeg',
+            description: 'Di Seoul tahun 1990-an, seorang polisi menyamar untuk menyusup ke organisasi narkoba yang berpengaruh. Ia mendapati dirinya terjebak di antara tugas, pengkhianatan, dan cinta yang membingungkan.',
+            rating: '⭐ 8.5/10',
+            genres: ['Action', 'Crime', 'Drama'],
+            age: '18+',
+            mc: ['Ji Chang Wook', 'Wi Ha Joon', 'Im Se Mi']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">The Worst Of Evil</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/vincenzo.jpeg" 
+          @click="showModal({
+            title: 'Vincenzo',
+            image: 'img/movie/vincenzo.jpeg',
+            description: 'Vincenzo Cassano, pengacara sekaligus consigliere mafia asal Italia, kembali ke Korea untuk mengembalikan emas tersembunyi. Namun, ia harus berhadapan dengan konglomerat korup dan membalas kejahatan dengan caranya sendiri.',
+            rating: '⭐ 9.1/10',
+            genres: ['Action', 'Crime', 'Comedy'],
+            age: '16+',
+            mc: ['Song Joong Ki', 'Jeon Yeo Been', 'Ok Taecyeon']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Vincenzo</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/blood.jpeg" 
+          @click="showModal({
+            title: 'Bloodhounds',
+            image: 'img/movie/blood.jpeg',
+            description: 'Dua petinju muda yang berhati baik terjebak dalam dunia pinjaman ilegal yang brutal. Bersama-sama, mereka berjuang melawan para rentenir kejam demi menegakkan keadilan dan melindungi orang-orang lemah.',
+            rating: '⭐ 8.4/10',
+            genres: ['Action', 'Drama', 'Crime'],
+            age: '18+',
+            mc: ['Woo Do Hwan', 'Lee Sang Yi', 'Park Sung Woong']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Bloodhounds</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/vigilante.jpeg" 
+         @click="showModal({
+            title: 'Vigilante',
+            image: 'img/movie/vigilante.jpeg',
+            description: 'Kim Ji Yong adalah mahasiswa akademi kepolisian yang menjadi pahlawan bayangan di malam hari. Ia menghukum para pelaku kejahatan yang lolos dari hukum, sementara polisi berusaha memburunya.',
+            rating: '⭐ 8.3/10',
+            genres: ['Action', 'Thriller', 'Crime'],
+            age: '18+',
+            mc: ['Nam Joo Hyuk', 'Yoo Ji Tae', 'Lee Joon Hyuk']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Vigilante</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Movies Horror -->
+    <section class="container mx-auto px-6 py-12">
+      <h3 class="text-2xl font-bold mb-6">Horror</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-2 mb-6 text-center gap-y-6 md:gap-y-8">
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/theconjuring.jpg" 
+         @click="showModal({
+            title: 'The Conjuring',
+            image: 'img/movie/horror/theconjuring.jpg',
+            description: 'Berdasarkan kisah nyata pasangan paranormal Ed dan Lorraine Warren, yang membantu keluarga Perron melawan kekuatan jahat yang menghantui rumah baru mereka di Rhode Island.',
+            rating: '⭐ 8.5/10',
+            genres: ['Horror', 'Mystery', 'Supernatural'],
+            age: '18+',
+            mc: ['Patrick Wilson', 'Vera Farmiga']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">The Conjuring</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+         <img src="img/movie/horror/thenun.jpg" 
+        @click="showModal({
+            title: 'The Nun',
+            image: 'img/movie/horror/thenun.jpg',
+            description: 'Seorang biarawati muda dan seorang imam dikirim Vatikan untuk menyelidiki kematian misterius di biara Rumania, namun mereka menemukan kekuatan iblis yang menakutkan bernama Valak.',
+            rating: '⭐ 7.3/10',
+            genres: ['Horror', 'Thriller', 'Supernatural'],
+            age: '17+',
+            mc: ['Taissa Farmiga', 'Demián Bichir']
+          })"
+         class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">The Nun</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/talktome.jpg" 
+          @click="showModal({
+            title: 'Talk to Me',
+            image: 'img/movie/horror/talktome.jpg',
+            description: 'Sekelompok remaja menemukan cara untuk berkomunikasi dengan roh menggunakan tangan yang terkutuk. Namun, permainan mereka berubah menjadi mimpi buruk ketika batas dunia hidup dan mati memudar.',
+            rating: '⭐ 8.1/10',
+            genres: ['Horror', 'Psychological', 'Thriller'],
+            age: '18+',
+            mc: ['Sophie Wilde', 'Alexandra Jensen', 'Joe Bird']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Talk To Me</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/insidious.jpg" 
+         @click="showModal({
+            title: 'Insidious: The Red Door',
+            image: 'img/movie/horror/insidious.jpg',
+            description: 'Keluarga Lambert kembali menghadapi masa lalu mereka yang menakutkan ketika pintu menuju dunia roh dibuka kembali. Perjalanan menegangkan ke dunia The Further pun dimulai.',
+            rating: '⭐ 7.9/10',
+            genres: ['Horror', 'Mystery', 'Supernatural'],
+            age: '17+',
+            mc: ['Patrick Wilson', 'Ty Simpkins', 'Rose Byrne']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Insidious: The Red Door</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/hereditary.jpg" 
+         @click="showModal({
+            title: 'Hereditary',
+            image: 'img/movie/horror/hereditary.jpg',
+            description: 'Setelah kematian nenek mereka, sebuah keluarga mulai mengalami kejadian aneh dan mengerikan. Rahasia kelam keluarga pun terungkap sedikit demi sedikit.',
+            rating: '⭐ 8.6/10',
+            genres: ['Horror', 'Drama', 'Mystery'],
+            age: '18+',
+            mc: ['Toni Collette', 'Alex Wolff', 'Milly Shapiro']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">Hereditary</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/themedium.jpg" 
+         @click="showModal({
+            title: 'The Medium',
+            image: 'img/movie/horror/themedium.jpg',
+            description: 'Film mockumentary asal Thailand ini mengikuti seorang dukun wanita di pedalaman Isan yang menyaksikan pewarisannya menjadi sesuatu yang jauh lebih jahat daripada yang ia bayangkan.',
+            rating: '⭐ 8.0/10',
+            genres: ['Horror', 'Mystery', 'Documentary Style'],
+            age: '18+',
+            mc: ['Sawanee Utoomma', 'Narilya Gulmongkolpech']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">The Medium</p>
+        </div>
+
+        <div class="hover:scale-105 transition-transform duration-300">
+          <img src="img/movie/horror/aquiteplace.jpg"
+          @click="showModal({
+            title: 'A Quiet Place',
+            image: 'img/movie/horror/aquiteplace.jpg',
+            description: 'Sebuah keluarga harus hidup dalam keheningan total untuk menghindari makhluk mengerikan yang berburu dengan suara. Setiap langkah, setiap bisikan bisa berarti kematian.',
+            rating: '⭐ 8.4/10',
+            genres: ['Horror', 'Sci-Fi', 'Thriller'],
+            age: '13+',
+            mc: ['Emily Blunt', 'John Krasinski', 'Millicent Simmonds']
+          })"
+          class="rounded-lg w-37 h-50 object-cover mb-2 cursor-pointer mx-auto" alt=""/>
+          <p class="text-sm">A Quiet Place</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div x-show="open"
+          class="fixed inset-0 flex items-center justify-center bg-black/70 z-9999"
+          x-transition>
+          
+        <div class="bg-white rounded-xl shadow-lg w-[450px] md:w-[700px] md:max-h-[350px] p-6 relative flex flex-col md:flex-row items-center gap-6">
+          <!-- Tombol close -->
+          <button @click="open = false" 
+                  class="absolute top-3 right-3 text-gray-500 hover:text-red-500">
+            ✖
+          </button>
+
+          <!-- Gambar Kiri -->
+          <div class="flex-shrink-0">
+            <img :src="movie.image" 
+                class="w-52 h-72 object-cover rounded-lg shadow-md" 
+                alt="Poster Film" />
+          </div>
+
+          <!-- Konten Kanan -->
+          <div class="flex flex-col justify-between text-left space-y-4">
+            <div>
+              <h2 class="text-2xl font-bold mb-3" x-text="movie.title"></h2>
+
+              <!-- Genre dan usia -->
+              <div class="flex flex-wrap gap-2 mb-3">
+                <template x-for="genre in movie.genres" :key="genre">
+                  <button class="text-indigo-600 border border-indigo-600 bg-white px-3 py-1 rounded-lg hover:bg-indigo-50 text-sm" x-text="genre"></button>
+                </template>
+                <button class="bg-indigo-600 text-white px-3 py-1 rounded-lg text-sm" x-text="movie.age"></button>
+              </div>
+
+              <p class="text-gray-600 text-sm mb-2" x-text="movie.description"></p>
+
+              <!-- Nama MC -->
+              <p class="text-gray-700 font-semibold"></p>
+                <p class="text-indigo-600">Pemeran Utama: <span class="text-gray-700" x-text="movie.mc.join(', ')"></span></p>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 font-semibold" x-text="movie.rating"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto bg-gradient-to-b from-white to-indigo-200 mt-12 shadow rounded-lg">
+      <div class="px-6 py-8 flex flex-col md:flex-row items-center md:justify-between text-center md:text-left">
+        <h4 class="text-xl font-bold mb-4 md:mb-0 text-indigo-700">🎬 MyMovie</h4>
+        
+        <div class="flex gap-6 justify-center md:justify-end">
+          <a href="https://www.instagram.com/hadiarsyd_/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M16 3C8.83 3 3 8.83 3 16V34C3 41.17 8.83 47 16 47H34C41.17 47 47 41.17 47 34V16C47 8.83 41.17 3 34 3H16zM37 11C38.1 11 39 11.9 39 13C39 14.1 38.1 15 37 15C35.9 15 35 14.1 35 13C35 11.9 35.9 11 37 11zM25 14C31.07 14 36 18.93 36 25C36 31.07 31.07 36 25 36C18.93 36 14 31.07 14 25C14 18.93 18.93 14 25 14zM25 16C20.04 16 16 20.04 16 25C16 29.96 20.04 34 25 34C29.96 34 34 29.96 34 25C34 20.04 29.96 16 25 16z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848
+                c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588
+                l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
+            </svg>
+          </a>
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 50 50" class="fill-current text-indigo-600 hover:text-indigo-800 transition">
+              <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4zM17,20v19h-6V20H17z
+                M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10
+                c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56
+                c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kontak -->
+      <div class="px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between text-center md:text-left">
+        <button class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 mb-4 md:mb-0">
+          Contact us :
+        </button>
+
+        <div>
+          <p class="mb-2">Email: MyMovie@gmail.com</p>
+          <p class="mb-2">Phone: 0831-2100-6688</p>
+          <p>Address: Bandung, Jawa Barat</p>
+        </div>
+      </div>
+
+      <!-- Subscribe -->
+      <div class="px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <p class="text-center md:text-left text-gray-700 font-medium">
+          Dapatkan info terbaru tentang film dan aktor favoritmu.
+        </p>
+        <form class="flex flex-col sm:flex-row justify-center md:justify-end gap-4">
+          <input type="email" placeholder="Email" class="rounded-lg border text-indigo-600 border-indigo-600 bg-white py-2 px-4 w-full sm:w-auto"/>
+          <button class="bg-indigo-700 text-white px-6 py-2 rounded-lg hover:bg-indigo-800">
+            Subscribe to news
+          </button>
+        </form>
+      </div>
+
+      <!-- Bawah -->
+      <div class="border-t border-indigo-700 py-6 text-center text-sm text-gray-600">
+        © 2025 MyMovie. All Rights Reserved.
+        <a href="#" class="underline ml-2">Privacy Policy</a>
+      </div>
+    </footer>
+
+    <script>
+      function movieModal() {
+        return {
+          open: false,
+          movie: { 
+            title: '', 
+            image: '', 
+            description: '', 
+            rating: '', 
+            genres: [], 
+            age: '', 
+            mc: [] 
+          },
+          showModal(data) {
+            this.movie = data
+            this.open = true
+          }
+        }
+      }
+    </script>
+    <script src="dist/js/script.js"></script>
+  </body>
+</html>

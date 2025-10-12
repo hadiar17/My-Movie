@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Reusable</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+
+  <div x-data="movieModal()">
+    <!-- Grid Poster -->
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Poster 1 -->
+      <img src="img/movie/beyond.jpeg" 
+           @click="showModal('Beyond the Horizon', 'img/movie/beyond.jpeg', 'Film ini bercerita tentang perjalanan ke luar angkasa yang penuh misteri...', '⭐ 8.7/10')" 
+           class="w-40 h-56 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition"
+           alt="Poster 1">
+
+      <!-- Poster 2 -->
+      <img src="img/dune.jpeg" 
+           @click="showModal('Dune: Awakening', 'img/dune.jpeg', 'Kisah perjuangan di planet Arrakis untuk menguasai spice...', '⭐ 9.0/10')" 
+           class="w-40 h-56 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition"
+           alt="Poster 2">
+
+      <!-- Poster 3 -->
+      <img src="img/avatar.jpeg" 
+           @click="showModal('Avatar: The Way of Water', 'img/avatar.jpeg', 'Petualangan keluarga Jake Sully menghadapi ancaman baru...', '⭐ 8.3/10')" 
+           class="w-40 h-56 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition"
+           alt="Poster 3">
+    </div>
+
+    <!-- Modal -->
+    <div x-show="open" 
+         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50"
+         x-transition>
+      
+      <div class="bg-white rounded-xl shadow-lg w-96 p-6 relative">
+        <!-- Tombol close -->
+        <button @click="open = false" 
+                class="absolute top-3 right-3 text-gray-500 hover:text-red-500">
+          ✖
+        </button>
+
+        <!-- Isi Modal -->
+        <h2 class="text-xl font-bold mb-2" x-text="movie.title"></h2>
+        <img :src="movie.image" class="w-full h-48 object-cover rounded-lg mb-3" alt="Poster Film"/>
+        <p class="text-gray-600 mb-4" x-text="movie.description"></p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-500 font-semibold" x-text="movie.rating"></span>
+          <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Lihat Detail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function movieModal() {
+      return {
+        open: false,
+        movie: { title: '', image: '', description: '', rating: '' },
+        showModal(title, image, description, rating) {
+          this.movie = { title, image, description, rating }
+          this.open = true
+        }
+      }
+    }
+  </script>
+</body>
+</html>
